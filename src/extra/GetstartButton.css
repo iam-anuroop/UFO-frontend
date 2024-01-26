@@ -1,0 +1,41 @@
+/* ButtonComponent.css */
+.custom-button {
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: black;
+    color: whitesmoke;
+    overflow: hidden;
+    width: 130px;
+    height: 35px;
+    border-radius: 5px;
+    border: 2px solid black;
+  }
+  
+  .custom-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: rgb(7, 240, 135);
+    transition: width 0.3s ease-in-out;
+  }
+  
+  .custom-button:hover::before {
+    width: 100%;
+  }
+  
+  .custom-button:hover {
+    color: black;
+  }
+  .btn-text{
+    position: absolute;
+    font-size: large;
+    font-weight: bold;
+    top: 6px;
+    left: 28px;
+  }
+  
+  
