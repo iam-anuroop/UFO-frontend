@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
@@ -7,12 +7,14 @@ import { MdAlternateEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { FaGoogle } from "react-icons/fa";
 import '../pages/Home.css'
+import AuthContext from '../context/AuthContext';
 
 
 
 
 
 function Login() {
+  const { authtoken,setAuthtoken } = useContext(AuthContext)
   const [email, setEmail] = useState(''); 
   const [password, setPassword] = useState(''); 
   const navigate = useNavigate()
@@ -35,6 +37,8 @@ function Login() {
         password:password
       });
       console.log('Registration successful:', response.data);
+      localStorage.setItem('authToken',JSON.stringify(response.data))
+      setAuthtoken(response.data)
     } catch (error) {
       console.error('Registration failed:', error);
     }
@@ -43,7 +47,7 @@ function Login() {
 
   return (
     <>
-    <div style={{display:'flex',justifyContent:'center'}}>
+    <div className='home-main' style={{display:'flex',justifyContent:'center'}}>
         <h1 style={{marginTop:'5%'}}>Login</h1>
       <Modal
         open={true}

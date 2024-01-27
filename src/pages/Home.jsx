@@ -38,9 +38,7 @@ const Home = () => {
         email:email
       });
       console.log('Registration successful:', response);
-    //   localStorage.setItem('key',JSON.stringify(response.data.key))
-    //   localStorage.setItem('email',JSON.stringify(response.data.email))
-    //   navigate('/login')
+      navigate('/login')
     } catch (error) {
       console.error('Registration failed:', error);
     }

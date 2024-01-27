@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
@@ -6,11 +6,13 @@ import Modal from '@mui/material/Modal';
 import { MdAlternateEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import '../pages/Home.css'
+import AuthContext from '../context/AuthContext';
 
 
 
 
 function ForgotPassword() {
+  const { authtoken } = useContext(AuthContext)
   const [email, setEmail] = useState(''); 
   const navigate = useNavigate()
 
@@ -22,24 +24,22 @@ function ForgotPassword() {
   };
 
   const registerEmail = async (e) => {
-    // e.preventDefault(); 
-    // try {
-    //   const response = await axios.post('http://127.0.0.1:8000/register/', { 
-    //     email:email
-    //   });
-    //   console.log('Registration successful:', response.data);
-    //   localStorage.setItem('key',JSON.stringify(response.data.key))
-    //   localStorage.setItem('email',JSON.stringify(response.data.email))
-    //   navigate('/login')
-    // } catch (error) {
-    //   console.error('Registration failed:', error);
-    // }
+    e.preventDefault(); 
+    try {
+      const response = await axios.post('http://127.0.0.1:8000/account/forgot/', { 
+        email:email
+      });
+      console.log('Registration successful:', response.data);
+      navigate('/login')
+    } catch (error) {
+      console.error('Registration failed:', error);
+    }
   };
   
 
   return (
     <>
-    <div style={{display:'flex',justifyContent:'center'}}>
+    <div className='home-main' style={{display:'flex',justifyContent:'center'}}>
         <h1 style={{marginTop:'5%'}}>Forgot password</h1>
       <Modal
         open={true}
@@ -58,7 +58,7 @@ function ForgotPassword() {
             </div>
             <button className="email-form-button button-submit" onClick={registerEmail}>Send mail<RiLockPasswordFill/></button>
             <p className="email-p line">Or</p>
-            <p className="email-p" style={{color:'blue'}} onClick={()=>navigate('/')}>Back to home</p>
+            <p className="email-p" style={{color:'blue'}} onClick={()=>authtoken?navigate('/home'):navigate('/')}>Back to home</p>
             
           </div>
         </Box>
