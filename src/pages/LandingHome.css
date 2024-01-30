@@ -28,3 +28,13 @@
     scale: 1.1;
     transition: all 0.3s ease;
 }
+
+@media screen and (max-width: 990px){
+
+    .land-home-second{
+        display: block;
+        align-items: center;
+        justify-content: center;
+    }
+
+  }
