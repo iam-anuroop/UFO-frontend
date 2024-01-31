@@ -39,7 +39,7 @@ function App() {
           <Route element={<ForgotPassword/>} path='/forgot'/>
           <Route element={<UserPrivate><ResetPassword/></UserPrivate>} path='/reset'/>
           <Route element={<UserPrivate><LandingHome/></UserPrivate>} path='/home'/>
-          <Route element={<UserPrivate><Chatting/></UserPrivate>} path='/chatting'/>
+          <Route element={<UserPrivate><Chatting/></UserPrivate>} path='/chatting/:id'/>
           <Route element={<UserPrivate><Globalgroups/></UserPrivate>} path='/global'/>
         </Routes>
       </AuthContext.Provider>
