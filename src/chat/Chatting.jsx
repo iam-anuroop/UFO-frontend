@@ -59,7 +59,7 @@ function Chatting() {
       <div className="chat-messages" ref={chatContainerRef}>
         {messages.map((msg, index) => (
           <div key={index} className={`message ${msg.sender === user.email ? 'sent' : 'received'}`}>
-            <div className={`message ${msg.sender === user.email ? 'sent-div' : 'recieve-div'}`}>{msg.content}</div>
+            <div className={`message-content ${msg.sender === user.email ? 'sent-div' : 'receive-div'}`}>{msg.content}</div>
           </div>
         ))}
       </div>

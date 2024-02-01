@@ -1,0 +1,36 @@
+/* FindRandom Component Styles */
+
+.find-random-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  .find-random-search {
+    text-align: center;
+  }
+  
+  .find-random-search-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .find-random-search-icon {
+    margin-left: 5px;
+  }
+  
+  .find-random-loading {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #007bff;
+  }
+  
+  .find-random-error {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #ff0000;
+  }
+  

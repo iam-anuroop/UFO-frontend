@@ -12,6 +12,7 @@ import UserPrivate from './private/UserPrivate'
 import NotLogined from './private/NotLogined'
 import Chatting from './chat/Chatting'
 import Globalgroups from './pages/Globalgroups'
+import FindRandom from './pages/FindRandom'
 
 function App() {
 
@@ -41,6 +42,7 @@ function App() {
           <Route element={<UserPrivate><LandingHome/></UserPrivate>} path='/home'/>
           <Route element={<UserPrivate><Chatting/></UserPrivate>} path='/chatting/:id'/>
           <Route element={<UserPrivate><Globalgroups/></UserPrivate>} path='/global'/>
+          <Route element={<UserPrivate><FindRandom/></UserPrivate>} path='/find'/>
         </Routes>
       </AuthContext.Provider>
     </>
