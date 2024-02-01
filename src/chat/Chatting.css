@@ -1,0 +1,70 @@
+/* Chatting Component Styles */
+
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+  }
+  
+  .message {
+    margin-bottom: 10px;
+  }
+  
+  .sent {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+
+  }
+  
+  .received {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+  }
+  .sent-div{
+    width: fit-content;
+    padding: 1%;
+    background: #007bff;
+    border-radius: 8px;
+  }
+  .recieve-div{
+    width: fit-content;
+    background: #00ff55;
+    padding: 1%;
+    border-radius: 8px;
+  }
+  
+  .chat-input {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background: gainsboro;
+  }
+  
+  .chat-input input {
+    flex: 1;
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid black;
+  }
+  
+  .send-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .send-button:hover {
+    background-color: #0056b3;
+  }
+  

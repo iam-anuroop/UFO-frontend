@@ -1,45 +1,46 @@
-import React, { useState, useEffect, useMemo, useContext, useRef } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import { w3cwebsocket as W3CWebSocket } from 'websocket';
 import AuthContext from '../context/AuthContext';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import './Chatting.css'; // External CSS file for styling
 
 function Chatting() {
-  const { user,authtoken } = useContext(AuthContext);
-  const [room, setRoom] = useState('test');
+  const { user, authtoken } = useContext(AuthContext);
+  const { id } = useParams();
+  const [room, setRoom] = useState(id);
   const [messages, setMessages] = useState([]);
   const [messageInput, setMessageInput] = useState('');
   const [username, setUsername] = useState(authtoken);
-  const client = useMemo(() => new W3CWebSocket(`ws://127.0.0.1:8000/ws/test/`), [room]);
+  const client = useRef(new W3CWebSocket(`ws://127.0.0.1:8000/ws/${id}/`));
   const chatContainerRef = useRef(null);
 
   useEffect(() => {
-
-    client.onopen = () => {
+    client.current.onopen = () => {
       console.log('WebSocket connection opened');
     };
 
-    client.onmessage = (message) => {
+    client.current.onmessage = (message) => {
       const data = JSON.parse(message.data);
       console.log('Received message:', data.sender);
       console.log('Received message:', data.text);
-
       setMessages((prevMessages) => [...prevMessages, { content: data.text, sender: data.sender }]);
+      // Automatically scroll to the bottom when a new message is received
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
     };
 
-    client.onerror = (error) => {
+    client.current.onerror = (error) => {
       console.error('WebSocket error:', error);
     };
 
-    client.onclose = (event) => {
+    client.current.onclose = (event) => {
       console.log('WebSocket connection closed:', event);
     };
 
-    
     return () => {
-      client.close();
+      client.current.close();
     };
-  }, [client]);
-
+  }, [id]);
 
   const sendMessage = () => {
     const messageData = {
@@ -47,35 +48,31 @@ function Chatting() {
       sender: user.email,
     };
 
-    if ((messageInput.trim()).length > 0) {
-      client.send(JSON.stringify(messageData));
+    if (messageInput.trim().length > 0) {
+      client.current.send(JSON.stringify(messageData));
       setMessageInput('');
     }
   };
 
   return (
-    <div>
-      <div style={{ height: '300px', border: '1px solid #ccc', padding: '10px', overflowY: 'auto' }} ref={chatContainerRef}>
+    <div className="chat-container">
+      <div className="chat-messages" ref={chatContainerRef}>
         {messages.map((msg, index) => (
-          <div key={index} >
-            <div>
-              <div>{msg.content}</div>
-            </div>
+          <div key={index} className={`message ${msg.sender === user.email ? 'sent' : 'received'}`}>
+            <div className={`message ${msg.sender === user.email ? 'sent-div' : 'recieve-div'}`}>{msg.content}</div>
           </div>
         ))}
       </div>
-      <div className='chat-box-input-div'>
+      <div className="chat-input">
         <input
-          className='chat-box-input'
           type="text"
           placeholder="Type your message..."
           value={messageInput}
           onChange={(e) => setMessageInput(e.target.value)}
         />
-        <button onClick={sendMessage} className='chat-box-send-btn'>
-          <i className="chat-box-send-icon fa-solid fa-paper-plane"></i>
+        <button onClick={sendMessage} className="send-button">
+          Send
         </button>
-
       </div>
     </div>
   );
