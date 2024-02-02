@@ -6,7 +6,7 @@ const NotLogined = ({ children }) => {
   const { authtoken } = useContext(AuthContext)
     return (
        <>
-      { !authtoken ? <Navigate to="/home" />:children }
+      { authtoken ? <Navigate to="/home" />:children }
        </>
     )  };
 
