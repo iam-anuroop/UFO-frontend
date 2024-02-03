@@ -48,7 +48,7 @@ const LandingHome = () => {
         },
       }}
     >
-      <Paper elevation={3} >
+      <Paper elevation={3}  onClick={()=>navigate('/find')}>
         <img className='choose-message' src="https://img.freepik.com/free-vector/group-people-chatting-each-other-using-phone_74855-10709.jpg?size=626&ext=jpg&ga=GA1.1.1690005628.1706170932&semt=ais" alt="" />
         <div className='landing-page-detail'>
             <h3>Message</h3>

@@ -2,7 +2,8 @@ import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import Chatting from '../chat/Chatting'
 import AuthContext from '../context/AuthContext';
-
+import { AiOutlineUsergroupAdd } from "react-icons/ai";
+import './Globalgroups.css'
 import './FindRandom.css'; 
 
 const FindRandom = () => {
@@ -39,6 +40,15 @@ const FindRandom = () => {
   };
 
   return (
+    <div style={{padding:'1%'}}>
+      <div className="global-groups-header">
+        <button className="global-groups-back-button">
+          Back
+        </button>
+        <button className="global-groups-create-button">
+          Create Group   <div><AiOutlineUsergroupAdd fontSize={'20px'}/></div>
+        </button>
+      </div>
     <div className="find-random-container">
       <div className="find-random-search">
         <button className="find-random-search-button" onClick={handleSearchClick}>
@@ -48,6 +58,7 @@ const FindRandom = () => {
         {error && <div className="find-random-error">{error}</div>}
       </div>
       {apiResponse && <Chatting/>}
+    </div>
     </div>
   );
 };

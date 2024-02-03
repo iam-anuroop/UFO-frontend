@@ -25,10 +25,6 @@ const Globalgroups = () => {
     navigate('/home');
   };
 
-  const handleJoinGroupClick = (id) => {
-    // Handle create group button click
-    console.log('Create Group button clicked',id);
-  };
 
   const fetchGroups = async () => {
     try {
