@@ -12,7 +12,7 @@ function Chatting() {
   const [messages, setMessages] = useState([]);
   const [messageInput, setMessageInput] = useState('');
   const [username, setUsername] = useState(authtoken);
-  const client = useRef(new W3CWebSocket(`ws://127.0.0.1:8000/ws/${id}/`));
+  const client = useRef(new W3CWebSocket(`ws://127.0.0.1:8000/ws/${id}/?token=${authtoken.access}`));
   const chatContainerRef = useRef(null);
 
   useEffect(() => {
