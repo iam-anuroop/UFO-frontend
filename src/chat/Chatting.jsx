@@ -3,19 +3,42 @@ import { w3cwebsocket as W3CWebSocket } from 'websocket';
 import AuthContext from '../context/AuthContext';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import './Chatting.css'; // External CSS file for styling
+import './Chatting.css'; 
+import UserBlock from '../extra/UserBlock';
+
 
 function Chatting() {
   const { user, authtoken } = useContext(AuthContext);
   const { id } = useParams();
-  const [room, setRoom] = useState(id);
+  const [usermanage, setUsermanage] = useState(false);
+  const [ admin,setAdmin ] = useState('')
   const [messages, setMessages] = useState([]);
   const [messageInput, setMessageInput] = useState('');
-  const [username, setUsername] = useState(authtoken);
   const client = useRef(new W3CWebSocket(`ws://127.0.0.1:8000/ws/${id}/?token=${authtoken.access}`));
   const chatContainerRef = useRef(null);
 
+  const fetchGroup = async () => {
+    try {
+      const response = await axios.get('http://127.0.0.1:8000/chat/creategroup/', {
+        headers: {
+          Authorization: `Bearer ${authtoken.access}`,
+        },
+        params: {
+          uuid: id,
+        },
+      });
+      setAdmin(response.data.group_admin)
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+
   useEffect(() => {
+
+    fetchGroup();
+
+
     client.current.onopen = () => {
       console.log('WebSocket connection opened');
     };
@@ -45,7 +68,7 @@ function Chatting() {
   const sendMessage = () => {
     const messageData = {
       text: messageInput,
-      sender: user.email,
+      sender: user.username, //username
     };
 
     if (messageInput.trim().length > 0) {
@@ -56,10 +79,16 @@ function Chatting() {
 
   return (
     <div className="chat-container">
+      {
+        usermanage&&<UserBlock/>
+      }
       <div className="chat-messages" ref={chatContainerRef}>
         {messages.map((msg, index) => (
-          <div key={index} className={`message ${msg.sender === user.email ? 'sent' : 'received'}`}>
-            <div className={`message-content ${msg.sender === user.email ? 'sent-div' : 'receive-div'}`}>{msg.content}</div>
+          <div key={index} className={`message ${msg.sender === user.username ? 'sent' : 'received'}`}>
+            <div className='msg-box'>
+              <div onClick={()=>admin&&admin.username===user.username?setUsermanage(!usermanage):setUsermanage(usermanage)} className={`${msg.sender === user.username ? 'message-sender' : 'not-sender'}`}>{msg.sender}</div>
+              <div className={`message-content ${msg.sender === user.username ? 'sent-div' : 'receive-div'}`}>{msg.content}</div>
+            </div>
           </div>
         ))}
       </div>

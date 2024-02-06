@@ -17,7 +17,7 @@ const Globalgroups = () => {
   const [ create,setCreate ] = useState(false)
   const [globalGroups , setGlobalgroups] = useState([])
 
-
+console.log(globalGroups);
 
   const handleClose = () => setCreate(false);
 

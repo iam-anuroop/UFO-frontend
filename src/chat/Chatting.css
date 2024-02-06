@@ -20,7 +20,6 @@
     display: flex;
     align-items: center;
     justify-content: end;
-
   }
   
   .received {
@@ -30,15 +29,37 @@
   }
   .sent-div{
     width: fit-content;
-    padding: 1%;
+    padding: 10px;
+    font-weight: bold;
     background: #007bff;
     border-radius: 8px;
   }
-  .recieve-div{
+  .receive-div{
     width: fit-content;
-    background: #00ff55;
-    padding: 1%;
+    padding: 10px;
+    font-weight: bold;
+    background: #00ff55 !important;
     border-radius: 8px;
+  }
+  .message-sender{
+    text-decoration: none;
+  }
+  .not-sender{
+    color:rgb(4, 4, 4);
+    padding-bottom: 5px;
+  }
+  .not-sender:hover{
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  .msg-box{
+    background: rgb(237, 233, 233);
+    padding: 5px;
+    border-radius: 10px;
+  }
+  .message-sender{
+    display: none;
   }
   
   .chat-input {
