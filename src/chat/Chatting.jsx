@@ -12,6 +12,7 @@ function Chatting() {
   const { id } = useParams();
   const [usermanage, setUsermanage] = useState(false);
   const [ admin,setAdmin ] = useState('')
+  const [ buser, setBuser ] = useState('')
   const [messages, setMessages] = useState([]);
   const [messageInput, setMessageInput] = useState('');
   const client = useRef(new W3CWebSocket(`ws://127.0.0.1:8000/ws/${id}/?token=${authtoken.access}`));
@@ -77,16 +78,25 @@ function Chatting() {
     }
   };
 
+  const manageBlock = (blockeduser) => {
+    setUsermanage(!usermanage)
+    setBuser(blockeduser)
+  }
+  const context = {
+    buser:buser,
+    id:id
+  }
+
   return (
     <div className="chat-container">
       {
-        usermanage&&<UserBlock/>
+        usermanage&&<UserBlock context={context}/>
       }
       <div className="chat-messages" ref={chatContainerRef}>
         {messages.map((msg, index) => (
           <div key={index} className={`message ${msg.sender === user.username ? 'sent' : 'received'}`}>
             <div className='msg-box'>
-              <div onClick={()=>admin&&admin.username===user.username?setUsermanage(!usermanage):setUsermanage(usermanage)} className={`${msg.sender === user.username ? 'message-sender' : 'not-sender'}`}>{msg.sender}</div>
+              <div onClick={()=>admin&&admin.username===user.username?manageBlock(msg.sender):setUsermanage(usermanage)} className={`${msg.sender === user.username ? 'message-sender' : 'not-sender'}`}>{msg.sender}</div>
               <div className={`message-content ${msg.sender === user.username ? 'sent-div' : 'receive-div'}`}>{msg.content}</div>
             </div>
           </div>

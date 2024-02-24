@@ -5,15 +5,18 @@ import AuthContext from '../context/AuthContext';
 import { AiOutlineUsergroupAdd } from "react-icons/ai";
 import './Globalgroups.css'
 import './FindRandom.css'; 
+import { useNavigate } from 'react-router-dom'
 
 const FindRandom = () => {
   const { authtoken } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const [apiResponse, setApiResponse] = useState(false);
   const [error, setError] = useState(null);
+  const navigate = useNavigate()
 
   const handleSearchClick = () => {
     setLoading(true);
+    setError(null)
   
     axios.get('http://127.0.0.1:8000/chat/find/', {
       headers: {
@@ -42,12 +45,12 @@ const FindRandom = () => {
   return (
     <div style={{padding:'1%'}}>
       <div className="global-groups-header">
-        <button className="global-groups-back-button">
+        <button onClick={()=>navigate('/home')} className="global-groups-back-button">
           Back
         </button>
-        <button className="global-groups-create-button">
+        {/* <button className="global-groups-create-button">
           Create Group   <div><AiOutlineUsergroupAdd fontSize={'20px'}/></div>
-        </button>
+        </button> */}
       </div>
     <div className="find-random-container">
       <div className="find-random-search">

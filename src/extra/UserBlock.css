@@ -1,0 +1,24 @@
+.block-box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    height: 100%;
+}
+.user-block-div{
+    display: flex;
+    gap: 20%;
+}
+.user-block-button,
+.user-unblock-button{
+    padding: 10%;
+    border-radius: 2px;
+    font-size: medium;
+    font-weight: bold;
+}
+.user-block-button{
+    background: rgb(247, 142, 142);
+}
+.user-unblock-button{
+    background: rgb(122, 240, 122);
+}

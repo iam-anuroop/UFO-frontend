@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
+import './UserBlock.css'
 
-const UserBlock = () => {
+const UserBlock = ({context}) => {
     const [open,setOpen] = useState(true)
+
   return (
     <Modal
         open={open}
@@ -13,8 +15,15 @@ const UserBlock = () => {
         className='block-modal'
       >
         <Box className='block-box'>
-          block
-          unblock
+          <div className="user-block-div">
+            <h1>{context.buser}</h1>
+            <button className="user-block-button">
+              Block
+            </button>
+            <button className="user-unblock-button">
+              Unblock
+            </button>
+          </div>
         </Box>
         
       </Modal>
