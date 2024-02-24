@@ -8,7 +8,7 @@ import { FaGoogle } from "react-icons/fa";
 import '../pages/Home.css'
 
 
-
+// okay
 
 function Register() {
   const [email, setEmail] = useState(''); 
