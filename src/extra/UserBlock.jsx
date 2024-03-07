@@ -24,6 +24,7 @@ const UserBlock = ({context}) => {
               Unblock
             </button>
           </div>
+            <div></div>
         </Box>
         
       </Modal>
